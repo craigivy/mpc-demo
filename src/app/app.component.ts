@@ -8,9 +8,7 @@ import { Notification, NotificationEvent, NotificationType } from 'patternfly-ng
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-
-  header = 'Default Header.';
-  message = 'Default Message.';
-  showClose: true;
-  type = 'success';
+  title = 'My first AGM project';
+  lat = 51.678418;
+  lng = 7.809007;
 }
