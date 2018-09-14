@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { ApplicationLauncherModule, ToastNotificationModule } from 'patternfly-ng';
+
 import { AppComponent } from './app.component';
 
 @NgModule({
@@ -8,6 +10,8 @@ import { AppComponent } from './app.component';
     AppComponent
   ],
   imports: [
+    ApplicationLauncherModule,
+    ToastNotificationModule,
     BrowserModule
   ],
   providers: [],

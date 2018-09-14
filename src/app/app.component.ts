@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
+
+import { Notification, NotificationEvent, NotificationType } from 'patternfly-ng/notification';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'tate-demo-ui';
+
+  header = 'Default Header.';
+  message = 'Default Message.';
+  showClose: true;
+  type = 'success';
 }
