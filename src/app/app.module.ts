@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { ApplicationLauncherModule, ToastNotificationModule } from 'patternfly-ng';
 import { AgmCoreModule } from '@agm/core';
 
+import { AppRoutingModule } from './app.routing.module';
 import { AppComponent } from './app.component';
 
 @NgModule({
@@ -13,6 +14,7 @@ import { AppComponent } from './app.component';
     AppComponent
   ],
   imports: [
+    AppRoutingModule,
     ApplicationLauncherModule,
     ToastNotificationModule,
     BrowserModule,

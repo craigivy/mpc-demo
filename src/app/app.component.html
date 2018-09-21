@@ -26,36 +26,4 @@
     </ul>
   </nav>
 </nav>
-<agm-map [latitude]="lat" [longitude]="lng" [zoom]="3">
-  <agm-marker *ngFor="let m of markers" [latitude]="m.lat" [longitude]="m.lng" [label]="m.label"></agm-marker>
-</agm-map>
-<div class="container">
-            <!-- <h1>Welcome to MPC Truck Request Form</h1> -->
-
-
-
-        <div class="row">
-          <section class='col-xs-12 col-sm-6 col-md-6'>
-            <section>
-              <h2>Select an account</h2>
-
-
-
-              <form method="post" action="/addname">
- <select>
- <option value="a1"> Visa (Foster City) on 10/12/2018</option>
- <option value="a2"> Discover (Chicago) on 10/14/2018</option>
- <option value="a3"> Delta (Atlanta) on 10/16/2018</option>
- <option value="a4"> Citi (New York) on 10/18/2018</option>
- <option value="a5"> RBC (Toronto) on 10/19/2018</option>
- <option value="a6"> Pemex (Mexico City) on 10/21/2018</option>
- </select>
-
- <br><br>
- <button type="submit" class="btn btn-primary" >Request Truck</button>
- </form>
-            </section>
-
-          </section>
-        </div>
-      </div>
+<router-outlet></router-outlet>
