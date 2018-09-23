@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 
 import { ApplicationLauncherModule, ToastNotificationModule } from 'patternfly-ng';
 import { AgmCoreModule } from '@agm/core';
+import { AgmDirectionModule } from 'agm-direction';
 
 import { AppRoutingModule } from './app.routing.module';
 import { AppComponent } from './app.component';
@@ -21,8 +22,9 @@ import { AppComponent } from './app.component';
     CommonModule,
     FormsModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyC5slsxmONLRZUBZGEfPaXRBwstRVykhuM'
-    })
+      apiKey: 'AIzaSyDqJJmddZYWipbXmwfAfiSb1gMXj8P6Jso'
+    }),
+    AgmDirectionModule
   ],
   providers: [],
   bootstrap: [AppComponent]
