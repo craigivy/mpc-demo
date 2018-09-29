@@ -12,8 +12,6 @@
               <h2>Select an account</h2>
 
 
-
-              <form method="post" action="/addname">
  <select>
  <option value="a1"> Visa (Foster City) on 10/12/2018</option>
  <option value="a2"> Discover (Chicago) on 10/14/2018</option>
@@ -24,9 +22,8 @@
  </select>
 
  <br><br>
- <button type="submit" class="btn btn-primary" >Request Truck</button>
- </form>
-            </section>
+ <button (click)="vote($event)" type="submit" class="btn btn-primary" >Request Truck?</button>
+             </section>
 
           </section>
         </div>

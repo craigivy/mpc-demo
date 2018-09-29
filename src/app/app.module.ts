@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ApplicationRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule} from '@angular/common/http';
 
 import { ApplicationLauncherModule, ToastNotificationModule } from 'patternfly-ng';
 import { AgmCoreModule } from '@agm/core';
@@ -21,6 +22,7 @@ import { AppComponent } from './app.component';
     BrowserModule,
     CommonModule,
     FormsModule,
+    HttpClientModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDqJJmddZYWipbXmwfAfiSb1gMXj8P6Jso'
     }),

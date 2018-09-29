@@ -1,14 +1,16 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 
 import { Notification, NotificationEvent, NotificationType } from 'patternfly-ng/notification';
 import { Solution } from './domain/Solution';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
 //  selector: 'vote',
   templateUrl: './app.vote.html',
   styleUrls: ['./app.vote.css']
 })
-export class VoteComponent {
+
+export class VoteComponent implements OnInit {
   title = 'My first AGM project';
   lat = 39.0921017;
   lng = -94.71580062;
@@ -22,6 +24,9 @@ export class VoteComponent {
 //   { lat: 19.4357552, lng: -99.1815213, label: 'Pemex' }
 
 // ];
+
+  constructor(private http: HttpClient) {
+  }
 
 public solution: Solution = new Solution().deserialize({
   'solutionName' : 'MPC Demo',
@@ -99,5 +104,19 @@ public solution: Solution = new Solution().deserialize({
 });
 
 public markers = this.solution.getLatLongArray();
+
+ngOnInit() {
+  const obs = this.http.get('http://httpbin.org/get');
+  obs.subscribe((response) => console.log(response));
+}
+
+vote(event) {
+  console.log(event);
+  const url = 'http://httpbin.org/post';
+  const data = new FormData();
+  data.append('accoundId', '104');
+  const obs = this.http.post(url, data);
+  obs.subscribe((response) => console.log(response));
+}
 
 }
