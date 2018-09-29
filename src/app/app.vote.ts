@@ -4,7 +4,7 @@ import { Notification, NotificationEvent, NotificationType } from 'patternfly-ng
 import { Solution } from './domain/Solution';
 
 @Component({
-  selector: 'vote',
+//  selector: 'vote',
   templateUrl: './app.vote.html',
   styleUrls: ['./app.vote.css']
 })
