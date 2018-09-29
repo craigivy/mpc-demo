@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 
 import { Notification, NotificationEvent, NotificationType } from 'patternfly-ng/notification';
 import { Solution } from '../domain/';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 @Component({
 //  selector: 'vote',
@@ -100,13 +100,17 @@ ngOnInit() {
   obs.subscribe((response) => console.log(response));
 }
 
-vote(event) {
-  console.log(event);
-  const url = 'http://httpbin.org/post';
-  // const url = 'http://mpc-demo-mpc-demo.129.146.147.59.xip.io/api/solver/userinput';
-  const data = new FormData();
-  data.append('accoundId', '104');
-  const obs = this.http.post(url, data);
+vote(electionForm) {
+  console.log(electionForm);
+  // const url = 'http://httpbin.org/post';
+  // const data = new FormData();
+  // data.append('accoundId', '104');
+  const url = 'http://mpc-demo-mpc-demo.129.146.147.59.xip.io/api/solver/userinput';
+  const body = new HttpParams()
+    .set('accountId', '104');
+  const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+    .set('Accept', '*/*');
+  const obs = this.http.post(url, body.toString(), {headers});
   obs.subscribe((response) => console.log(response));
 }
 
