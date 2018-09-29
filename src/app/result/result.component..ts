@@ -1,32 +1,34 @@
-import { Component, ViewEncapsulation, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
-import { Notification, NotificationEvent, NotificationType } from 'patternfly-ng/notification';
-import { Solution } from './domain/Solution';
-import { HttpClient } from '@angular/common/http';
+import { Solution } from '../domain';
 
 @Component({
-//  selector: 'vote',
-  templateUrl: './app.vote.html',
-  styleUrls: ['./app.vote.css']
+//  selector: 'my-app',
+  templateUrl: './result.component.html',
+  styleUrls: ['./result.component.css']
 })
+export class ResultComponent {
 
-export class VoteComponent implements OnInit {
-  title = 'My first AGM project';
-  lat = 39.0921017;
-  lng = -94.71580062;
+  lat: Number = 41.85;
+  lng: Number = -87.65;
 
-// markers: {lat: number, lng: number, label: string}[] = [
-//   { lat: 37.5592563, lng: -122.2785536, label: 'Visa' },
-//   { lat: 42.1567664, lng: -87.8922984, label: 'Discover' },
-//   { lat: 33.6585169, lng: -84.4261124, label: 'Delta'},
-//   { lat: 40.7206599, lng: -74.0134065, label: 'Citi'},
-//   { lat: 43.6465201, lng: -79.3822483, label: 'RBC' },
-//   { lat: 19.4357552, lng: -99.1815213, label: 'Pemex' }
+  origin = 'Saint Lous, MO';
+  destination = 'Orlando, FL';
 
-// ];
+  // waypoints: object = [
+  //   {
+  //       location: 'Plano, TX',
+  //       stopover: true,
+  //   }, {
+  //       location: 'Sunnyvale, CA',
+  //       stopover: true,
+  //   }, {
+  //       location: 'Raleigh, NC',
+  //       stopover: true,
+  //   } ];
 
-  constructor(private http: HttpClient) {
-  }
+//  origin = { lat: 24.799448, lng: 120.979021 };
+//  destination = { lat: 24.799524, lng: 120.975017 };
 
 public solution: Solution = new Solution().deserialize({
   'solutionName' : 'MPC Demo',
@@ -103,20 +105,6 @@ public solution: Solution = new Solution().deserialize({
   } ]
 });
 
-public markers = this.solution.getLatLongArray();
-
-ngOnInit() {
-  const obs = this.http.get('http://httpbin.org/get');
-  obs.subscribe((response) => console.log(response));
-}
-
-vote(event) {
-  console.log(event);
-  const url = 'http://httpbin.org/post';
-  const data = new FormData();
-  data.append('accoundId', '104');
-  const obs = this.http.post(url, data);
-  obs.subscribe((response) => console.log(response));
-}
+public waypoints = this.solution.getWaypoints();
 
 }

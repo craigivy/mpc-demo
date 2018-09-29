@@ -1,34 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 
-import { Solution } from './domain/Solution';
+import { Notification, NotificationEvent, NotificationType } from 'patternfly-ng/notification';
+import { Solution } from '../domain/';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
-//  selector: 'my-app',
-  templateUrl: './app.result.html',
-  styleUrls: ['./app.result.css']
+//  selector: 'vote',
+  templateUrl: './vote.component.html',
+  styleUrls: ['./vote.component.css']
 })
-export class ResultComponent {
 
-  lat: Number = 41.85;
-  lng: Number = -87.65;
+export class VoteComponent implements OnInit {
+  title = 'My first AGM project';
+  lat = 39.0921017;
+  lng = -94.71580062;
 
-  origin = 'Saint Lous, MO';
-  destination = 'Orlando, FL';
-
-  // waypoints: object = [
-  //   {
-  //       location: 'Plano, TX',
-  //       stopover: true,
-  //   }, {
-  //       location: 'Sunnyvale, CA',
-  //       stopover: true,
-  //   }, {
-  //       location: 'Raleigh, NC',
-  //       stopover: true,
-  //   } ];
-
-//  origin = { lat: 24.799448, lng: 120.979021 };
-//  destination = { lat: 24.799524, lng: 120.975017 };
+  constructor(private http: HttpClient) {
+  }
 
 public solution: Solution = new Solution().deserialize({
   'solutionName' : 'MPC Demo',
@@ -105,6 +93,20 @@ public solution: Solution = new Solution().deserialize({
   } ]
 });
 
-public waypoints = this.solution.getWaypoints();
+public markers = this.solution.getLatLongArray();
+
+ngOnInit() {
+  const obs = this.http.get('http://httpbin.org/get');
+  obs.subscribe((response) => console.log(response));
+}
+
+vote(event) {
+  console.log(event);
+  const url = 'http://httpbin.org/post';
+  const data = new FormData();
+  data.append('accoundId', '104');
+  const obs = this.http.post(url, data);
+  obs.subscribe((response) => console.log(response));
+}
 
 }
