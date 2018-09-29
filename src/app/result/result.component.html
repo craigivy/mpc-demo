@@ -1,3 +1,25 @@
-<agm-map [latitude]="lat" [longitude]="lng" [zoom]="3">
-  <agm-direction [origin]="origin" [destination]="destination" [waypoints]="waypoints" [optimizeWaypoints] ="false"></agm-direction>
-</agm-map>
+<div class="container">
+  <div>
+    <h1><b>MPC Demo</b></h1>
+  </div>
+  <div  class="row col-12">
+    <p *ngIf="loading" class="loading">Loading</p>
+    <div *ngIf="!loading">
+      <agm-map [latitude]="lat" [longitude]="lng" [zoom]="4" *ngIf="!showRoute">
+            <agm-marker  *ngFor="let m of markers" [latitude]="m.latitude" [longitude]="m.longitude" [label]="m.label"></agm-marker>
+      </agm-map>
+      <agm-map [latitude]="lat" [longitude]="lng" [zoom]="3" *ngIf="showRoute && !loading">
+        <agm-direction [origin]="origin" [destination]="destination" [waypoints]="waypoints" [optimizeWaypoints] ="false"></agm-direction>
+      </agm-map>
+    </div>
+  </div>
+  <div class="row buttons">
+      <div class="col-md-6">
+          <button class="btn btn-lg btn-block" (click)="setShowPins()" >Show Pins</button>
+      </div>
+      <div class="col-md-6">
+          <button class="btn btn-primary btn-lg btn-block" (click)="setShowRoute()">Calculate Route</button>
+      </div>
+  </div>
+</div>
+

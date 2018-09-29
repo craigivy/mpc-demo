@@ -98,6 +98,7 @@ public markers = this.solution.getLatLongArray();
 ngOnInit() {
   const obs = this.http.get('http://httpbin.org/get');
   obs.subscribe((response) => console.log(response));
+
 }
 
 vote(event) {

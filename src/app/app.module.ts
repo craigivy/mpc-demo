@@ -1,18 +1,17 @@
 import { AgmCoreModule } from '@agm/core';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { AgmDirectionModule } from 'agm-direction';
-import { ApplicationLauncherModule, ToastNotificationModule } from 'patternfly-ng';
+import { ApplicationLauncherModule } from 'patternfly-ng';
 import { AppComponent } from './app.component';
-import { ResultComponent } from './result/result.component.';
+import { ResultComponent } from './result/result.component';
+import { ErrorHandlerService } from './service/api.error-handler.service';
+import { ApiService } from './service/api.service';
 import { VoteComponent } from './vote/vote.component';
-
-
-
 
 @NgModule({
   declarations: [
@@ -22,7 +21,6 @@ import { VoteComponent } from './vote/vote.component';
   ],
   imports: [
     ApplicationLauncherModule,
-    ToastNotificationModule,
     BrowserModule,
     CommonModule,
     FormsModule,
@@ -38,7 +36,10 @@ import { VoteComponent } from './vote/vote.component';
     AgmCoreModule,
     AgmDirectionModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorHandlerService, multi: true },
+    ApiService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
