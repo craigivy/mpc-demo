@@ -103,6 +103,7 @@ ngOnInit() {
 vote(event) {
   console.log(event);
   const url = 'http://httpbin.org/post';
+  // const url = 'http://mpc-demo-mpc-demo.129.146.147.59.xip.io/api/solver/userinput';
   const data = new FormData();
   data.append('accoundId', '104');
   const obs = this.http.post(url, data);
