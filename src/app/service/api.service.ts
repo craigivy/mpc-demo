@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, of, merge } from 'rxjs';
 import { mapTo, delay } from 'rxjs/operators';
 import { Solution } from '../domain';
@@ -19,8 +19,26 @@ export class ApiService {
   }
 
   public getAccounts(): Solution {
+    const obs = this.http.get('http://httpbin.org/get');
+    obs.subscribe((response) => console.log(response));
+
     return (this.hardCodedWithID());
   }
+
+  vote(accountId) {
+    console.log(accountId);
+    // const url = 'http://httpbin.org/post';
+    // const data = new FormData();
+    // data.append('accoundId', '104');
+    const url = 'http://mpc-demo-mpc-demo.129.146.147.59.xip.io/api/solver/userinput';
+    const body = new HttpParams()
+      .set('accountId', accountId);
+    const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+      .set('Accept', '*/*');
+    const obs = this.http.post(url, body.toString(), {headers});
+    obs.subscribe((response) => console.log(response));
+  }
+
 
   private hardCoded(): Solution {
     return new Solution().deserialize({
