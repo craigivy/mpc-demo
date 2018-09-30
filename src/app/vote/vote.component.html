@@ -12,7 +12,7 @@
           <div class="form-check " *ngFor="let e of elections">
               <label class="form-check-label text-center" [for]="e.accountId">
                   <input class="form-check-input radio-inline" [id]="e.accountId" type="radio" name="election" [value]="e.accountId" [(ngModel)]="election">
-                  {{e.venueName}} ({{e.cityName}})
+                  {{e.venueName}} ({{e.cityName}}) - {{ e.date | date:'mediumDate' }}
               </label>
           </div>
           <input class="btn btn-primary" type="submit" value="submit">

@@ -18,9 +18,9 @@ export class Solution implements Serializable<Solution> {
     });
   }
 
-  public getElections(): {accountId: String, venueName: String, cityName: String}[] {
+  public getElections(): {accountId: String, venueName: String, cityName: String, date: Date}[] {
     return this.solutionEntries.map(es => {
-      return  {accountId: es.accountId, venueName: es.venueName, cityName: es.cityName };
+      return  {accountId: es.accountId, venueName: es.venueName, cityName: es.cityName, date: es.date};
     });
   }
 
