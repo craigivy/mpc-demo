@@ -1,6 +1,7 @@
 
 export class SolutionEntry implements Serializable<SolutionEntry> {
 
+  public accountId: String;
   public venueName: String;
   public cityName: String;
   public latitude: number;
@@ -9,6 +10,7 @@ export class SolutionEntry implements Serializable<SolutionEntry> {
   public date: Date;
 
   deserialize(input): SolutionEntry {
+    this.accountId = input.accountId;
     this.venueName = input.venueName;
     this.cityName = input.cityName;
     this.latitude = input.latitude;

@@ -20,7 +20,7 @@ export class Solution implements Serializable<Solution> {
 
   public getElections(): {accountId: String, venueName: String, cityName: String}[] {
     return this.solutionEntries.map(es => {
-      return  {accountId: es.venueName, venueName: es.venueName, cityName: es.cityName };
+      return  {accountId: es.accountId, venueName: es.venueName, cityName: es.cityName };
     });
   }
 
