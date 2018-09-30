@@ -3,18 +3,19 @@
   <form #electionForm="ngForm" (ngSubmit)="vote(electionForm)">
     <div class="panel panel-primary">
       <div class="panel-heading">
-        <h5 class="panel-tittle">Welcome to MPC Truck Request Form</h5>
+        <h2 class="panel-tittle">Welcome to MPC Truck Request Form</h2>
       </div>
+
       <div clas="panel-body">
         <div class="form-group">
           <label>Select an account</label>
-
-          <div class="form-check" *ngFor="let e of elections">
-            <input class="form-check-input" [id]="e.accountId" type="radio" name="election" [value]="e.accountId" [(ngModel)]="election">
-            <label class="form-check-label" [for]="e.accountId">{{e.venueName}} ({{e.cityName}})</label>
+          <div class="form-check " *ngFor="let e of elections">
+              <label class="form-check-label text-center" [for]="e.accountId">
+                  <input class="form-check-input radio-inline" [id]="e.accountId" type="radio" name="election" [value]="e.accountId" [(ngModel)]="election">
+                  {{e.venueName}} ({{e.cityName}})
+              </label>
           </div>
-
-          <input type="submit" value="submit">
+          <input class="btn btn-primary" type="submit" value="submit">
         </div>
       </div>
     </div>

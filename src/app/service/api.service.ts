@@ -7,13 +7,7 @@ import { Solution } from '../domain';
 export class ApiService {
 
   public getSolution(): Observable<Solution> {
-    // example.pipe(
-    //   mapTo('World!'),
-    //   delay(1000)
-    // )
     const c: Observable<Solution> = of(null);
-
-
     return merge(c.pipe(
       mapTo(this.hardCoded()),
       delay(2000)
