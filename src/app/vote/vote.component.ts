@@ -93,16 +93,17 @@ public solution: Solution = new Solution().deserialize({
   } ]
 });
 
-public markers = this.solution.getLatLongArray();
+public elections = this.solution.getElections();
 
 ngOnInit() {
+  console.log(this.elections);
   const obs = this.http.get('http://httpbin.org/get');
   obs.subscribe((response) => console.log(response));
 
 }
 
 vote(electionForm) {
-  console.log(electionForm);
+  console.log(electionForm.value.election);
   // const url = 'http://httpbin.org/post';
   // const data = new FormData();
   // data.append('accoundId', '104');

@@ -18,6 +18,12 @@ export class Solution implements Serializable<Solution> {
     });
   }
 
+  public getElections(): {accountId: String, venueName: String, cityName: String}[] {
+    return this.solutionEntries.map(es => {
+      return  {accountId: es.venueName, venueName: es.venueName, cityName: es.cityName };
+    });
+  }
+
   deserialize(input): Solution {
     this.solutionName = input.solutionName;
     const array: any[] = input.solutionEntries;
