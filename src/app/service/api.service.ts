@@ -14,8 +14,6 @@ export class ApiService {
   private solutionUrl = this.base + 'solution';
   private logCacheUrl = this.base + 'printcache';
 
-
-
   constructor(private http: HttpClient) {
   }
 
@@ -32,6 +30,10 @@ export class ApiService {
     return this.http.get(this.accountsUrl).pipe(map(o => new Solution().deserializeAccounts(o)));
 
     // return of(this.hardCodedWithID());
+  }
+
+  public getRequestedAccounts(): Observable<Solution> {
+    return this.http.get(this.requestedUrl).pipe(map(o => new Solution().deserializeAccounts(o)));
   }
 
   public vote(accountId) {

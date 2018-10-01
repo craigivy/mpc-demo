@@ -30,11 +30,16 @@ export class ResultComponent implements OnInit {
   ngOnInit() {
 
 
+    this.api.getRequestedAccounts().subscribe(s => {
+      this.markers = s.getLatLongArray();
+      console.log(this.markers);
+    });
+
     this.api.getSolution().subscribe(s => {
       if (s != null) {
         console.log('hello');
         this.solution = s;
-        this.markers = s.getLatLongArray();
+//        this.markers = s.getLatLongArray();
         const temp = s.getWaypoints();
         const cut: {location: String, stopover: boolean}[] = temp.slice(0, temp.length - 1);
         this.waypoints = cut;
