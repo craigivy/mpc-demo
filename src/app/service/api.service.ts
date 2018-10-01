@@ -7,6 +7,12 @@ import { Solution } from '../domain';
 @Injectable()
 export class ApiService {
 
+  private base = 'http://mpc-demo-mpc-demo.129.146.154.34.xip.io/api/solver/';
+  private voteUrl = this.base + 'userinput';
+  private accountsUrl = this.base + 'defaultaccounts';
+  private logCache = this.base + 'printcache';
+  private solutionUrl = this.base + 'solution';
+
   constructor(private http: HttpClient) {
   }
 
@@ -21,22 +27,22 @@ export class ApiService {
   public getAccounts(): Solution {
     const obs = this.http.get('http://httpbin.org/get');
     obs.subscribe((response) => console.log(response));
-
     return (this.hardCodedWithID());
   }
 
-  vote(accountId) {
-    console.log(accountId);
-    // const url = 'http://httpbin.org/post';
-    // const data = new FormData();
-    // data.append('accoundId', '104');
-    const url = 'http://mpc-demo-mpc-demo.129.146.147.59.xip.io/api/solver/userinput';
+  public vote(accountId) {
+    console.log('vote=' + accountId);
     const body = new HttpParams()
       .set('accountId', accountId);
     const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
       .set('Accept', '*/*');
-    const obs = this.http.post(url, body.toString(), {headers});
-    obs.subscribe((response) => console.log(response));
+    const obs = this.http.post(this.voteUrl, body.toString(), {headers});
+    obs.subscribe(
+      // (val) => { console.log('api vote val', val); },
+      // (response) => { console.log('api vote response', response); },
+      // () => { console.log('api vote complete'); }
+    );
+    console.log(this.logCache, 'will log the cache');
   }
 
 
