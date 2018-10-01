@@ -7,11 +7,14 @@ import { Solution } from '../domain';
 @Injectable()
 export class ApiService {
 
-  private base = 'http://mpc-demo-mpc-demo.129.146.154.34.xip.io/api/solver/';
+  private base = 'http://mpc-demo-mpc-demo.tate.rh.stencell.net/api/solver/';
   private voteUrl = this.base + 'userinput';
   private accountsUrl = this.base + 'defaultaccounts';
-  private logCache = this.base + 'printcache';
+  private requestedUrl = this.base + 'selectedaccounts';
   private solutionUrl = this.base + 'solution';
+  private logCacheUrl = this.base + 'printcache';
+
+
 
   constructor(private http: HttpClient) {
   }
@@ -43,7 +46,7 @@ export class ApiService {
       // (response) => { console.log('api vote response', response); },
       // () => { console.log('api vote complete'); }
     );
-    console.log(this.logCache, 'will log the cache');
+    console.log(this.logCacheUrl, 'will log the cache');
   }
 
 
