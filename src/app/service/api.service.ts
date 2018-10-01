@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, of, merge } from 'rxjs';
-import { mapTo, delay } from 'rxjs/operators';
+import { mapTo, delay, map } from 'rxjs/operators';
 import { Solution } from '../domain';
 
 @Injectable()
@@ -26,9 +26,9 @@ export class ApiService {
 
   public getAccounts(): Observable<Solution> {
 
-    // const obs = this.http.get(this.accountsUrl);
-    // s = new Solution().deserializeAccounts(response);
-    return of(this.hardCodedWithID());
+    return this.http.get(this.accountsUrl).pipe(map(o => new Solution().deserialize(o)));
+
+    // return of(this.hardCodedWithID());
   }
 
   public vote(accountId) {
