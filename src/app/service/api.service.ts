@@ -25,8 +25,9 @@ export class ApiService {
   }
 
   public getAccounts(): Solution {
-    const obs = this.http.get('http://httpbin.org/get');
-    obs.subscribe((response) => console.log(response));
+
+    // const obs = this.http.get(this.accountsUrl);
+    // s = new Solution().deserializeAccounts(response);
     return (this.hardCodedWithID());
   }
 
