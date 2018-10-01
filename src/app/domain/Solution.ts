@@ -30,4 +30,10 @@ export class Solution implements Serializable<Solution> {
     this.solutionEntries = array.map(i => new SolutionEntry().deserialize(i));
     return this;
   }
+
+  deserializeAccounts(input): Solution {
+    const array: any[] = input;
+    this.solutionEntries = array.map(i => new SolutionEntry().deserialize(i));
+    return this;
+  }
 }
