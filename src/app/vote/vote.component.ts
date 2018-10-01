@@ -21,9 +21,10 @@ export class VoteComponent implements OnInit {
   }
 
 ngOnInit() {
-  const s = this.api.getAccounts();
-  this.elections = s.getElections();
-  console.log(this.elections);
+  this.api.getAccounts().subscribe(s => {
+    this.elections = s.getElections();
+    console.log(this.elections);
+  });
 }
 
 vote(electionForm) {

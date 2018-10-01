@@ -24,11 +24,11 @@ export class ApiService {
     ));
   }
 
-  public getAccounts(): Solution {
+  public getAccounts(): Observable<Solution> {
 
     // const obs = this.http.get(this.accountsUrl);
     // s = new Solution().deserializeAccounts(response);
-    return (this.hardCodedWithID());
+    return of(this.hardCodedWithID());
   }
 
   public vote(accountId) {
