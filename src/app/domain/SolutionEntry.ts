@@ -19,4 +19,16 @@ export class SolutionEntry implements Serializable<SolutionEntry> {
     this.date = new Date(input.date);
     return this;
   }
+
+  deserializeAccount(input): SolutionEntry {
+    this.accountId = input.accountId;
+    this.venueName = input.venueName;
+    this.cityName = input.city;
+    this.latitude = input.latitude;
+    this.longitude = input.longitude;
+    this.revenueOpportunity = input.revenueOpportunity;
+    this.date = new Date(input.availableDate);
+    return this;
+  }
+
 }

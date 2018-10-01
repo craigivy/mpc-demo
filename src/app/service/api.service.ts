@@ -26,7 +26,7 @@ export class ApiService {
 
   public getAccounts(): Observable<Solution> {
 
-    return this.http.get(this.accountsUrl).pipe(map(o => new Solution().deserialize(o)));
+    return this.http.get(this.accountsUrl).pipe(map(o => new Solution().deserializeAccounts(o)));
 
     // return of(this.hardCodedWithID());
   }

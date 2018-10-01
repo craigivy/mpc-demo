@@ -33,7 +33,7 @@ export class Solution implements Serializable<Solution> {
 
   deserializeAccounts(input): Solution {
     const array: any[] = input;
-    this.solutionEntries = array.map(i => new SolutionEntry().deserialize(i));
+    this.solutionEntries = array.map(i => new SolutionEntry().deserializeAccount(i));
     return this;
   }
 }
