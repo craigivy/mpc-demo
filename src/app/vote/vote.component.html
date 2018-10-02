@@ -1,6 +1,6 @@
 <div class="container">
 
-  <form #electionForm="ngForm" (ngSubmit)="vote(electionForm)">
+  <form #electionForm="ngForm" (ngSubmit)="onSubmit(electionForm.value)" class="ui form">
     <div class="panel panel-primary">
       <div class="panel-heading">
         <h2 class="panel-tittle">Welcome to MPC Truck Request Form</h2>
@@ -11,7 +11,7 @@
           <label>Select an account</label>
           <div class="form-check " *ngFor="let e of elections">
               <label class="form-check-label text-center" [for]="e.accountId">
-                  <input class="form-check-input radio-inline" [id]="e.accountId" type="radio" name="election" [value]="e.accountId" [(ngModel)]="election">
+                  <input class="form-check-input radio-inline" [id]="e.accountId" type="radio" name="election" [value]="e.accountId" [(ngModel)]="election" title="Please select at least one account." required>
                   {{e.venueName}} ({{e.cityName}}) - {{ e.date | date:'mediumDate' }}
               </label>
           </div>
