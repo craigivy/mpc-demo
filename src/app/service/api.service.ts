@@ -7,6 +7,7 @@ import { Solution } from '../domain';
 @Injectable()
 export class ApiService {
 
+  // swagger link -http://mpc-demo-mpc-demo.tate.rh.stencell.net/swagger-ui.html#/
   private base = 'http://mpc-demo-mpc-demo.tate.rh.stencell.net/api/solver/';
   private voteUrl = this.base + 'userinput';
   private accountsUrl = this.base + 'defaultaccounts';
