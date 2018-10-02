@@ -19,11 +19,12 @@ export class ApiService {
   }
 
   public getSolution(): Observable<Solution> {
-    const c: Observable<Solution> = of(null);
-    return merge(c.pipe(
-      mapTo(this.hardCoded()),
-      delay(2000)
-    ));
+    return this.http.get(this.requestedUrl).pipe(map(o => new Solution().deserializeAccounts(o)));
+    // const c: Observable<Solution> = of(null);
+    // return merge(c.pipe(
+    //   mapTo(this.hardCoded()),
+    //   delay(2000)
+    // ));
   }
 
   public getAccounts(): Observable<Solution> {
