@@ -12,6 +12,7 @@
   "private": true,
   "dependencies": {
     "@agm/core": "^1.0.0-beta.3",
+    "@agm/snazzy-info-window": "^1.0.0-beta.5",
     "@angular/animations": "^6.1.0",
     "@angular/common": "^6.1.0",
     "@angular/compiler": "^6.1.0",
@@ -28,6 +29,7 @@
     "patternfly": "^3.54.2",
     "patternfly-ng": "^4.5.1",
     "rxjs": "^6.3.3",
+    "snazzy-info-window": "^1.1.0",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {

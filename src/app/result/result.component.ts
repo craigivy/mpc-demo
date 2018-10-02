@@ -1,5 +1,4 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
-
 import { Solution } from '../domain';
 
 import { ApiService } from '../service/api.service';

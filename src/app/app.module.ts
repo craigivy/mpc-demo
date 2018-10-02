@@ -1,4 +1,5 @@
 import { AgmCoreModule } from '@agm/core';
+import { AgmSnazzyInfoWindowModule  } from '@agm/snazzy-info-window';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
@@ -34,7 +35,8 @@ import { VoteComponent } from './vote/vote.component';
       { path: '**', redirectTo: '' }
     ]),
     AgmCoreModule,
-    AgmDirectionModule
+    AgmDirectionModule,
+    AgmSnazzyInfoWindowModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorHandlerService, multi: true },
