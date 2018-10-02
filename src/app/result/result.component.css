@@ -15,3 +15,7 @@ agm-map {
   margin-top: 5vh;
   padding: 10% 0;
 }
+
+.loc-text {
+  white-space: nowrap;
+}

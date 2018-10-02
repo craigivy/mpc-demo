@@ -6,22 +6,30 @@
     <p *ngIf="loading" class="loading">Loading</p>
     <div *ngIf="!loading">
       <agm-map [latitude]="lat" [longitude]="lng" [zoom]="4" *ngIf="!showRoute">
-          <div *ngFor="let m of markers">
-            <agm-marker   [latitude]="m.latitude" [longitude]="m.longitude" [label]="{
-              color: 'black',
-              fontWeight: 'bold',
-              text: m.label
-          }">
-                <agm-snazzy-info-window [isOpen]="true" [pointer]="false" [maxWidth]="200" [padding]="'2px'" [fontSize]="'8px'" [closeWhenOthersOpen]="false" [showCloseButton]="false">
-                    <ng-template>
-                      $$$$$$$$$$$$
-                    </ng-template>
-                  </agm-snazzy-info-window>
-            </agm-marker>
-          </div>
+        <div *ngFor="let m of markers">
+          <agm-marker   [latitude]="m.latitude" [longitude]="m.longitude" [label]="{color: 'black',fontWeight: 'bold',text: m.label}">
+              <agm-snazzy-info-window [isOpen]="true" [pointer]="false" [maxWidth]="200" [padding]="'2px'" [fontSize]="'8px'" [closeWhenOthersOpen]="false" [showCloseButton]="false">
+                  <ng-template>
+                    <div class="loc-text">MM/DD: $.$$</div>
+                  </ng-template>
+                </agm-snazzy-info-window>
+          </agm-marker>
+        </div>
       </agm-map>
       <agm-map [latitude]="lat" [longitude]="lng" [zoom]="3" *ngIf="showRoute && !loading">
-        <agm-direction [origin]="origin" [destination]="destination" [waypoints]="waypoints" [optimizeWaypoints] ="false"></agm-direction>
+          <div *ngFor="let m of markers">
+              <agm-marker   [latitude]="m.latitude" [longitude]="m.longitude" [label]="{color: 'black',fontWeight: 'bold',text: m.label}">
+                  <agm-snazzy-info-window [isOpen]="true" [pointer]="false" [maxWidth]="200" [padding]="'2px'" [fontSize]="'8px'" [closeWhenOthersOpen]="false" [showCloseButton]="false">
+                      <ng-template>
+                        <div class="loc-text">MM/DD: $.$$</div>
+                      </ng-template>
+                    </agm-snazzy-info-window>
+              </agm-marker>
+            </div>
+            <agm-marker [latitude]="27.6648" [longitude]="-81.5158" [iconUrl]="flImagePath" [label]="{color: 'black',fontWeight: 'bold',text: 'FL'}">
+            </agm-marker>
+            <agm-direction [markerOptions]="markerOptions" [renderOptions]="renderOptions" [infoWindow]="infoWindow" [origin]="origin" [destination]="destination" [waypoints]="waypoints" [optimizeWaypoints] ="false">
+            </agm-direction>
       </agm-map>
     </div>
   </div>
