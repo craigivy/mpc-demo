@@ -17,14 +17,25 @@ export class ResultComponent implements OnInit {
   constructor(private api: ApiService) {
   }
 
-  origin: String = 'Saint Lous, MO';
+  origin: String = 'Saint Lous, MO' ;
+  public markerOptions = {
+    origin: {
+        icon: './assets/truck-40x40.png',
+        draggable: false,
+    }
+};
+
+ public flImagePath = './assets/notavail-40x40.png';
+
+  public renderOptions = {
+    suppressMarkers: true
+  };
+
   destination: String;
   public solution: Solution;
   public markers;
   public showRoute = false;
   public loading = true;
-
-  stateChanged: EventEmitter<boolean> = new EventEmitter();
 
   ngOnInit() {
 
@@ -38,7 +49,6 @@ export class ResultComponent implements OnInit {
       if (s != null) {
         console.log('hello');
         this.solution = s;
-//        this.markers = s.getLatLongArray();
         const temp = s.getWaypoints();
         const cut: {location: String, stopover: boolean}[] = temp.slice(0, temp.length - 1);
         this.waypoints = cut;
