@@ -27,8 +27,8 @@ ngOnInit() {
   });
 }
 
-vote(electionForm) {
-  this.api.vote(electionForm.value.election);
-}
-
+onSubmit(form: any): void {  
+    console.log('you submitted value:', form.election);
+    this.api.vote(form.election);  
+  }
 }
