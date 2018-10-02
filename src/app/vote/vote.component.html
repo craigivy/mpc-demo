@@ -9,7 +9,7 @@
       <div clas="panel-body">
         <div class="form-group">
           <label>Select an account</label>
-          <div class="form-check " *ngFor="let e of elections">
+          <div class="form-check" *ngFor="let e of elections">
               <label class="form-check-label text-center" [for]="e.accountId">
                   <input class="form-check-input radio-inline" [id]="e.accountId" type="radio" name="election" [value]="e.accountId" [(ngModel)]="election" title="Please select at least one account." required>
                   {{e.venueName}} ({{e.cityName}}) - {{ e.date | date:'mediumDate' }}
