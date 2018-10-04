@@ -8,7 +8,7 @@
       <!-- Map For All Locations-->
       <agm-map [latitude]="lat" [longitude]="lng" [zoom]="4" *ngIf="screen === 1">
         <div *ngFor="let m of allAccountsMarkers; let i = index">
-          <agm-marker   [latitude]="m.latitude" [longitude]="m.longitude">
+          <agm-marker   [latitude]="m.latitude" [longitude]="m.longitude" [iconUrl]="bluePin">
               <agm-snazzy-info-window [isOpen]="true" [pointer]="false" [maxWidth]="200" [padding]="'2px'" [fontSize]="'8px'" [closeWhenOthersOpen]="false" [showCloseButton]="false">
                   <ng-template>
                     <div class="loc-text">{{m.venueName}}</div>
@@ -16,6 +16,7 @@
                 </agm-snazzy-info-window>
           </agm-marker>
           <agm-marker [latitude]="25.0343" [longitude]="-77.3963" [iconUrl]="flImagePath" [label]="{color: 'black',fontWeight: 'bold',text: 'C4'}"></agm-marker>
+          <agm-marker [latitude]="38.6270" [longitude]="-90.1994"[iconUrl]="truckLocation"></agm-marker>
         </div>
       </agm-map>
       <!-- Map for selected locations -->
@@ -29,10 +30,11 @@
                 </agm-snazzy-info-window>
           </agm-marker>
           <agm-marker [latitude]="25.0343" [longitude]="-77.3963" [iconUrl]="flImagePath" [label]="{color: 'black',fontWeight: 'bold',text: 'C4'}"></agm-marker>
+          <agm-marker [latitude]="38.6270" [longitude]="-90.1994"[iconUrl]="truckLocation"></agm-marker>
         </div>
       </agm-map>
       <!-- Map for route -->
-      <agm-map [latitude]="lat" [longitude]="lng" [zoom]="4" *ngIf="screen === 3">
+      <agm-map [latitude]="lat" [longitude]="lng" [zoom]="4" [usePanning]="true" *ngIf="screen === 3">
           <div *ngFor="let m of markers; let i = index">
               <agm-marker   [latitude]="m.latitude" [longitude]="m.longitude" [label]="(i + 1).toString()">
                   <agm-snazzy-info-window [isOpen]="true" [pointer]="false" [maxWidth]="200" [padding]="'2px'" [fontSize]="'8px'" [closeWhenOthersOpen]="false" [showCloseButton]="false">
@@ -54,7 +56,7 @@
           <button class="btn btn-lg btn-block" (click)="setShowPins()" >Show Requested Accounts</button>
       </div>
       <div class="col-md-6">
-          <button class="btn btn-primary btn-lg btn-block" (click)="setShowRoute()">Find Optimal Route</button>
+          <button class="btn btn-primary btn-lg btn-block" (click)="setShowRoute()"  [attr.disabled]="!calculatedResults?'':null">Find Optimal Route</button>
       </div>
   </div>
 </div>
