@@ -6,16 +6,14 @@ export class Solution implements Serializable<Solution> {
 
   public solutionEntries: SolutionEntry[];
 
-  public getWaypoints(): {location: String, stopover: boolean}[] {
+  public getWaypoints(): {location: {lat: number, lng: number }, stopover: boolean}[] {
     return this.solutionEntries.map(es => {
-      return  {location: es.cityName, stopover: true };
+      return  {location: {lat: es.latitude, lng: es.longitude}, stopover: true };
     });
   }
 
-  public getLatLongArray(): {latitude: number, longitude: number, label: String}[] {
-    return this.solutionEntries.map(es => {
-      return  {latitude: es.latitude, longitude: es.longitude, label: es.venueName };
-    });
+  public getLatLongArray(): SolutionEntry[] {
+    return this.solutionEntries;
   }
 
   public getElections(): {accountId: String, venueName: String, cityName: String, date: Date}[] {

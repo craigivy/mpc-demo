@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
-import { Solution } from '../domain';
+import { Solution, SolutionEntry } from '../domain';
 
 import { ApiService } from '../service/api.service';
 
@@ -12,7 +12,7 @@ export class ResultComponent implements OnInit {
 
   lat: Number = 41.85;
   lng: Number = -87.65;
-  public waypoints: {location: String, stopover: boolean}[];
+  public waypoints: {location: { lat: number, lng: number }, stopover: boolean}[];
 
   constructor(private api: ApiService) {
   }
@@ -31,38 +31,59 @@ export class ResultComponent implements OnInit {
     suppressMarkers: true
   };
 
-  destination: String;
+  destination: { lat: number, lng: number };
   public solution: Solution;
-  public markers;
+  public markers: SolutionEntry[];
   public showRoute = false;
   public loading = true;
 
   ngOnInit() {
-
-
     this.api.getRequestedAccounts().subscribe(s => {
-      this.markers = s.getLatLongArray();
-      console.log(this.markers);
-    });
-
-    this.api.getSolution().subscribe(s => {
       if (s != null) {
-        console.log('hello');
-        this.solution = s;
-        const temp = s.getWaypoints();
-        const cut: {location: String, stopover: boolean}[] = temp.slice(0, temp.length - 1);
-        this.waypoints = cut;
-        this.destination = temp[ temp.length - 1].location;
+        console.log('requested accounts');
+        this.setSolution(s);
         this.loading = false;
       }
+      console.log(this.markers);
     });
   }
 
   setShowRoute() {
     this.showRoute = true;
+    this.loading = true;
+    this.api.getSolution().subscribe(s => {
+      if (s != null) {
+        console.log('solution');
+        this.setSolution(s);
+        this.loading = false;
+      }
+      console.log(this.markers);
+    });
   }
 
   setShowPins() {
     this.showRoute = false;
   }
+
+  setSolution(s: Solution) {
+    this.solution = s;
+        const temp = s.getWaypoints();
+        console.log('waypoints: ' + temp);
+        console.log(temp);
+        this.markers = s.getLatLongArray();
+        console.log('markers: ' + this.markers);
+        console.log(this.markers);
+        const cut: {location: { lat: number, lng: number }, stopover: boolean}[] = temp.slice(0, temp.length - 1);
+        this.waypoints = cut;
+        this.destination = temp[ temp.length - 1].location;
+  }
+
+
+
+  // blackLabel(index: number): {color: string, fontWeight: string, text: string} {
+  //   console.log('This might hurt.');
+  //   return {color: 'black',
+  //     fontWeight: 'bold',
+  //   text: index.toString()};
+  // }
 }
