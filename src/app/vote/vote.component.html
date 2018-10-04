@@ -15,7 +15,7 @@
                   {{e.venueName}} ({{e.cityName}}) - {{ e.date | date:'mediumDate' }}
               </label>
           </div>
-          <input class="btn btn-primary" type="submit" value="Vote!" [disabled]="!electionForm.valid">
+          <input class="btn btn-primary" type="submit" value="Request Truck" [disabled]="!electionForm.valid">
         </div>
         <div *ngIf="wasSubmitted">
           <h1 class="text-center">Thanks for your input!</h1>
