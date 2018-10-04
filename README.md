@@ -20,9 +20,12 @@ Run `dist.sh` which will run a ng prod build and copy over the nginx config file
 
 deploy to openshift with:
 ```
-oc new-app registry.access.redhat.com/rhscl/nginx-112-rhel7~https://github.com/ambaumann/mpc-demo-ui.git --context-dir=dist/tate-demo-ui/ --name ui-mpc
-oc expose svc/ui-mpc
+oc new-app registry.access.redhat.com/rhscl/nginx-112-rhel7~https://github.com/ambaumann/mpc-demo-ui.git --context-dir=dist/tate-demo-ui/ --name ui
+oc expose svc/ui
 ```
+
+If this is not your first deploy make sure you delete the ui image from the repository first.  You only need to expose the route once as part of your first deploy
+
 
 ## Running unit tests
 
