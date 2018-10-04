@@ -25,7 +25,7 @@ export class ResultComponent implements OnInit {
     }
 };
 
- public flImagePath = './assets/notavail-40x40.png';
+ public flImagePath = './assets/hurricane-60x60.png';
 
   public renderOptions = {
     suppressMarkers: true
@@ -33,15 +33,32 @@ export class ResultComponent implements OnInit {
 
   destination: { lat: number, lng: number };
   public solution: Solution;
+  public allAccountsMarkers: SolutionEntry[];
   public markers: SolutionEntry[];
-  public showRoute = false;
+
   public loading = true;
 
+  public screen = Screen.ALL;
+
   ngOnInit() {
+    this.loading = true;
+    this.api.getAllAccounts().subscribe(s => {
+      if (s != null) {
+        console.log('all accounts');
+        this.loading = false;
+        this.allAccountsMarkers = s.solutionEntries;
+      }
+      console.log(this.allAccountsMarkers);
+    });
+  }
+
+  setShowPins() {
+    this.loading = true;
+    this.screen = Screen.SELECTED;
     this.api.getRequestedAccounts().subscribe(s => {
       if (s != null) {
         console.log('requested accounts');
-        this.setSolution(s);
+        this.markers = s.getLatLongArray();
         this.loading = false;
       }
       console.log(this.markers);
@@ -49,7 +66,7 @@ export class ResultComponent implements OnInit {
   }
 
   setShowRoute() {
-    this.showRoute = true;
+    this.screen = Screen.ROUTE;
     this.loading = true;
     this.api.getSolution().subscribe(s => {
       if (s != null) {
@@ -61,10 +78,6 @@ export class ResultComponent implements OnInit {
     });
   }
 
-  setShowPins() {
-    this.showRoute = false;
-  }
-
   setSolution(s: Solution) {
     this.solution = s;
         const temp = s.getWaypoints();
@@ -73,7 +86,7 @@ export class ResultComponent implements OnInit {
         this.markers = s.getLatLongArray();
         console.log('markers: ' + this.markers);
         console.log(this.markers);
-        const cut: {location: { lat: number, lng: number }, stopover: boolean}[] = temp.slice(0, temp.length - 1);
+        const cut: {location: { lat: number, lng: number }, stopover: boolean}[] = temp.slice(0, temp.length - 2);
         this.waypoints = cut;
         this.destination = temp[ temp.length - 1].location;
   }
@@ -86,4 +99,10 @@ export class ResultComponent implements OnInit {
   //     fontWeight: 'bold',
   //   text: index.toString()};
   // }
+}
+
+export enum Screen {
+  ALL = 1,
+  SELECTED,
+  ROUTE
 }

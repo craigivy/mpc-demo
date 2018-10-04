@@ -10,12 +10,17 @@ export class ApiService {
   // swagger link -http://mpc-demo-mpc-demo.tate.rh.stencell.net/swagger-ui.html#/
   private base = 'http://mpc-demo-mpc-demo.tate.rh.stencell.net/api/solver/';
   private voteUrl = this.base + 'userinput';
+  private allAccountsUrl = this.base + 'allaccounts';
   private accountsUrl = this.base + 'defaultaccounts';
   private requestedUrl = this.base + 'selectedaccounts';
   private solutionUrl = this.base + 'solution';
   private logCacheUrl = this.base + 'printcache';
 
   constructor(private http: HttpClient) {
+  }
+
+  public getAllAccounts(): Observable<Solution> {
+    return this.http.get(this.allAccountsUrl).pipe(map(o => new Solution().deserializeAccounts(o)));
   }
 
   public getSolution(): Observable<Solution> {

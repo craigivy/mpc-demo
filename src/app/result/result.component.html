@@ -5,28 +5,44 @@
   <div  class="row col-12">
     <p *ngIf="loading" class="loading">Loading</p>
     <div *ngIf="!loading">
-      <agm-map [latitude]="lat" [longitude]="lng" [zoom]="4" *ngIf="!showRoute">
-        <div *ngFor="let m of markers">
-          <agm-marker   [latitude]="m.latitude" [longitude]="m.longitude" [label]="{color: 'black',fontWeight: 'bold',text: m.venueName}">
+      <!-- Map For All Locations-->
+      <agm-map [latitude]="lat" [longitude]="lng" [zoom]="4" *ngIf="screen === 1">
+        <div *ngFor="let m of allAccountsMarkers; let i = index">
+          <agm-marker   [latitude]="m.latitude" [longitude]="m.longitude">
               <agm-snazzy-info-window [isOpen]="true" [pointer]="false" [maxWidth]="200" [padding]="'2px'" [fontSize]="'8px'" [closeWhenOthersOpen]="false" [showCloseButton]="false">
                   <ng-template>
-                    <div class="loc-text">MM/DD: $.$$</div>
+                    <div class="loc-text">{{m.venueName}}</div>
                   </ng-template>
                 </agm-snazzy-info-window>
           </agm-marker>
+          <agm-marker [latitude]="25.0343" [longitude]="-77.3963" [iconUrl]="flImagePath" [label]="{color: 'black',fontWeight: 'bold',text: 'C4'}"></agm-marker>
         </div>
       </agm-map>
-      <agm-map [latitude]="lat" [longitude]="lng" [zoom]="3" *ngIf="showRoute && !loading">
+      <!-- Map for selected locations -->
+      <agm-map [latitude]="lat" [longitude]="lng" [zoom]="4" *ngIf="screen === 2">
+        <div *ngFor="let m of markers; let i = index">
+          <agm-marker   [latitude]="m.latitude" [longitude]="m.longitude">
+              <agm-snazzy-info-window [isOpen]="true" [pointer]="false" [maxWidth]="200" [padding]="'2px'" [fontSize]="'8px'" [closeWhenOthersOpen]="false" [showCloseButton]="false">
+                  <ng-template>
+                    <div class="loc-text">{{m.venueName}}: ${{m.revenueOpportunity}}</div>
+                  </ng-template>
+                </agm-snazzy-info-window>
+          </agm-marker>
+          <agm-marker [latitude]="25.0343" [longitude]="-77.3963" [iconUrl]="flImagePath" [label]="{color: 'black',fontWeight: 'bold',text: 'C4'}"></agm-marker>
+        </div>
+      </agm-map>
+      <!-- Map for route -->
+      <agm-map [latitude]="lat" [longitude]="lng" [zoom]="4" *ngIf="screen === 3">
           <div *ngFor="let m of markers; let i = index">
               <agm-marker   [latitude]="m.latitude" [longitude]="m.longitude" [label]="(i + 1).toString()">
                   <agm-snazzy-info-window [isOpen]="true" [pointer]="false" [maxWidth]="200" [padding]="'2px'" [fontSize]="'8px'" [closeWhenOthersOpen]="false" [showCloseButton]="false">
                       <ng-template>
-                        <div class="loc-text">{{m.venueName}} {{m.getMonthDay()}}: {{m.revenueOpportunity}}</div>
+                        <div class="loc-text">{{m.venueName}} {{m.getMonthDay()}}: ${{m.revenueOpportunity}}</div>
                       </ng-template>
                     </agm-snazzy-info-window>
               </agm-marker>
             </div>
-            <agm-marker [latitude]="27.6648" [longitude]="-81.5158" [iconUrl]="flImagePath" [label]="{color: 'black',fontWeight: 'bold',text: 'FL'}">
+            <agm-marker [latitude]="25.0343" [longitude]="-77.3963" [iconUrl]="flImagePath" [label]="{color: 'black',fontWeight: 'bold',text: 'C4'}">
             </agm-marker>
             <agm-direction [markerOptions]="markerOptions" [renderOptions]="renderOptions" [origin]="origin" [destination]="destination" [waypoints]="waypoints" [optimizeWaypoints] ="false">
             </agm-direction>
@@ -35,10 +51,10 @@
   </div>
   <div class="row buttons">
       <div class="col-md-6">
-          <button class="btn btn-lg btn-block" (click)="setShowPins()" >Show Pins</button>
+          <button class="btn btn-lg btn-block" (click)="setShowPins()" >Show Requested Accounts</button>
       </div>
       <div class="col-md-6">
-          <button class="btn btn-primary btn-lg btn-block" (click)="setShowRoute()">Calculate Route</button>
+          <button class="btn btn-primary btn-lg btn-block" (click)="setShowRoute()">Find Optimal Route</button>
       </div>
   </div>
 </div>
