@@ -2,4 +2,4 @@
 
 rm -rf dist
 ng build --prod
-cp nginx.conf ./dist/tate-demo-ui/
+cp nginx.conf dist/tate-demo-ui/
