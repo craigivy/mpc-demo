@@ -16,6 +16,8 @@ export class VoteComponent implements OnInit {
   lng = -94.71580062;
   public elections;
 
+  public wasSubmitted = false;
+
   constructor(private api: ApiService, private http: HttpClient, private router: Router) {
   }
 
@@ -25,9 +27,9 @@ ngOnInit() {
   });
 }
 
-onSubmit(form: any): void {  
+onSubmit(form: any): void {
     console.log('vote :', form.election);
-    this.api.vote(form.election);  
-    this.router.navigateByUrl('/result');
+    this.api.vote(form.election);
+    this.wasSubmitted = true;
   }
 }
