@@ -19,12 +19,7 @@ export class ApiService {
   }
 
   public getSolution(): Observable<Solution> {
-    return this.http.get(this.requestedUrl).pipe(map(o => new Solution().deserializeAccounts(o)));
-    // const c: Observable<Solution> = of(null);
-    // return merge(c.pipe(
-    //   mapTo(this.hardCoded()),
-    //   delay(2000)
-    // ));
+    return this.http.get(this.solutionUrl).pipe(map(o => new Solution().deserializeAccounts(o)));
   }
 
   public getAccounts(): Observable<Solution> {
@@ -35,7 +30,10 @@ export class ApiService {
   }
 
   public getRequestedAccounts(): Observable<Solution> {
-    return this.http.get(this.requestedUrl).pipe(map(o => new Solution().deserializeAccounts(o)));
+    return this.http.get(this.requestedUrl).pipe(map(o => {
+      console.log(o);
+      return new Solution().deserializeAccounts(o);
+    }));
   }
 
   public vote(accountId) {

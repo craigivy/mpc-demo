@@ -31,4 +31,8 @@ export class SolutionEntry implements Serializable<SolutionEntry> {
     return this;
   }
 
+  getMonthDay(): String {
+    return this.date.getMonth() + '/' + this.date.getDate();
+  }
+
 }
