@@ -6,7 +6,7 @@ export class SolutionEntry implements Serializable<SolutionEntry> {
   public cityName: String;
   public latitude: number;
   public longitude: number;
-  public revenueOpportunity: number;
+  public revenueOpportunity: String;
   public date: Date;
 
   deserialize(input): SolutionEntry {
@@ -26,7 +26,7 @@ export class SolutionEntry implements Serializable<SolutionEntry> {
     this.cityName = input.city;
     this.latitude = input.latitude;
     this.longitude = input.longitude;
-    this.revenueOpportunity = input.revenueOpportunity;
+    this.revenueOpportunity = input.revenueOpportunityStr;
     this.date = new Date(input.availableDate);
     return this;
   }
