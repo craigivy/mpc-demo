@@ -6,7 +6,8 @@
         <h2 class="panel-tittle">Welcome to MPC Truck Request Form</h2>
       </div>
 
-      <div clas="panel-body">
+      <p *ngIf="loading" class="loading">Loading...</p>
+      <div *ngIf="!loading" class="panel-body">
         <div class="form-group" *ngIf="!wasSubmitted">
           <label>Select an account</label>
           <div class="form-check" *ngFor="let e of elections">
