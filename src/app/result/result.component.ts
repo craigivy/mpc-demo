@@ -98,7 +98,7 @@ export class ResultComponent implements OnInit {
     const cut: {
       location: { lat: number; lng: number };
       stopover: boolean;
-    }[] = temp.slice(0, temp.length - 2);
+    }[] = temp.slice(0, temp.length - 1);
     this.waypoints = cut;
     this.destination = temp[temp.length - 1].location;
   }
