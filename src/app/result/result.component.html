@@ -2,61 +2,75 @@
   <div>
     <h1><b>MPC Demo</b></h1>
   </div>
-  <div  class="row col-12">
+  <div class="row col-12">
     <p *ngIf="loading" class="loading">Loading</p>
     <div *ngIf="!loading">
       <!-- Map For All Locations-->
       <agm-map [latitude]="lat" [longitude]="lng" [zoom]="4" *ngIf="screen === 1">
         <agm-marker [latitude]="25.0343" [longitude]="-77.3963" [iconUrl]="flImagePath" [label]="{color: 'black',fontWeight: 'bold',text: 'Cat 4'}"></agm-marker>
-        <agm-marker [latitude]="38.6270" [longitude]="-90.1994"[iconUrl]="truckLocation"></agm-marker>
+        <agm-marker [latitude]="38.6270" [longitude]="-90.1994" [iconUrl]="truckLocation"></agm-marker>
         <div *ngFor="let m of allAccountsMarkers; let i = index">
-          <agm-marker   [latitude]="m.latitude" [longitude]="m.longitude" [iconUrl]="bluePin">
-              <agm-snazzy-info-window [isOpen]="true" [pointer]="false" [maxWidth]="200" [padding]="'2px'" [fontSize]="'8px'" [closeWhenOthersOpen]="false" [showCloseButton]="false">
-                  <ng-template>
-                    <div class="loc-text">{{m.venueName}}</div>
-                  </ng-template>
-                </agm-snazzy-info-window>
+          <agm-marker [latitude]="m.latitude" [longitude]="m.longitude" [iconUrl]="bluePin">
+            <agm-snazzy-info-window [isOpen]="true" [pointer]="false" [maxWidth]="200" [padding]="'2px'" [fontSize]="'8px'"
+              [closeWhenOthersOpen]="false" [showCloseButton]="false">
+              <ng-template>
+                <div class="loc-text">{{m.venueName}}</div>
+              </ng-template>
+            </agm-snazzy-info-window>
           </agm-marker>
         </div>
       </agm-map>
       <!-- Map for selected locations -->
       <agm-map [latitude]="lat" [longitude]="lng" [zoom]="4" *ngIf="screen === 2">
         <agm-marker [latitude]="25.0343" [longitude]="-77.3963" [iconUrl]="flImagePath" [label]="{color: 'black',fontWeight: 'bold',text: 'Cat 4'}"></agm-marker>
-        <agm-marker [latitude]="38.6270" [longitude]="-90.1994"[iconUrl]="truckLocation"></agm-marker>
+        <agm-marker [latitude]="38.6270" [longitude]="-90.1994" [iconUrl]="truckLocation"></agm-marker>
         <div *ngFor="let m of markers; let i = index">
-          <agm-marker   [latitude]="m.latitude" [longitude]="m.longitude">
-              <agm-snazzy-info-window [isOpen]="true" [pointer]="false" [maxWidth]="200" [padding]="'2px'" [fontSize]="'8px'" [closeWhenOthersOpen]="false" [showCloseButton]="false">
-                  <ng-template>
-                    <div class="loc-text">{{m.venueName}}: {{m.revenueOpportunity}}</div>
-                  </ng-template>
-                </agm-snazzy-info-window>
+          <agm-marker [latitude]="m.latitude" [longitude]="m.longitude">
+            <agm-snazzy-info-window [isOpen]="true" [pointer]="false" [maxWidth]="200" [padding]="'2px'" [fontSize]="'8px'"
+              [closeWhenOthersOpen]="false" [showCloseButton]="false">
+              <ng-template>
+                <div class="loc-text">{{m.venueName}}: {{m.revenueOpportunity}}</div>
+              </ng-template>
+            </agm-snazzy-info-window>
           </agm-marker>
         </div>
       </agm-map>
       <!-- Map for route -->
       <agm-map [latitude]="lat" [longitude]="lng" [zoom]="4" [usePanning]="true" *ngIf="screen === 3">
-          <div *ngFor="let m of markers; let i = index">
-              <agm-marker   [latitude]="m.latitude" [longitude]="m.longitude" [label]="(i + 1).toString()">
-                  <agm-snazzy-info-window [isOpen]="true" [pointer]="false" [maxWidth]="200" [padding]="'2px'" [fontSize]="'8px'" [closeWhenOthersOpen]="false" [showCloseButton]="false">
-                      <ng-template>
-                        <div class="loc-text">{{m.venueName}} {{m.getMonthDay()}}: {{m.revenueOpportunity}}</div>
-                      </ng-template>
-                    </agm-snazzy-info-window>
-              </agm-marker>
-            </div>
-            <agm-marker [latitude]="25.0343" [longitude]="-77.3963" [iconUrl]="flImagePath" [label]="{color: 'black',fontWeight: 'bold',text: 'Cat 4'}"></agm-marker>
-            <agm-direction [markerOptions]="markerOptions" [renderOptions]="renderOptions" [origin]="origin" [destination]="destination" [waypoints]="waypoints" [optimizeWaypoints] ="false">
-            </agm-direction>
+        <div *ngFor="let m of solvedEntries; let i = index">
+          <agm-marker [latitude]="m.latitude" [longitude]="m.longitude" [label]="(i + 1).toString()">
+            <agm-snazzy-info-window [isOpen]="true" [pointer]="false" [maxWidth]="200" [padding]="'2px'" [fontSize]="'8px'"
+              [closeWhenOthersOpen]="false" [showCloseButton]="false">
+              <ng-template>
+                <div class="loc-text">{{m.venueName}} {{m.getMonthDay()}}: {{m.revenueOpportunity}}</div>
+              </ng-template>
+            </agm-snazzy-info-window>
+          </agm-marker>
+        </div>
+        <div *ngFor="let m of unsolvedEntries; let i = index">
+          <agm-marker [latitude]="m.latitude" [longitude]="m.longitude" [label]="X">
+            <agm-snazzy-info-window [isOpen]="true" [pointer]="false" [maxWidth]="200" [padding]="'2px'" [fontSize]="'8px'"
+              [closeWhenOthersOpen]="false" [showCloseButton]="false">
+              <ng-template>
+                <div class="loc-text">{{m.venueName}} {{m.getMonthDay()}}: {{m.revenueOpportunity}}</div>
+              </ng-template>
+            </agm-snazzy-info-window>
+          </agm-marker>
+        </div>
+        <agm-marker [latitude]="25.0343" [longitude]="-77.3963" [iconUrl]="flImagePath" [label]="{color: 'black',fontWeight: 'bold',text: 'Cat 4'}"></agm-marker>
+        <agm-direction [markerOptions]="markerOptions" [renderOptions]="renderOptions" [origin]="origin" [destination]="destination"
+          [waypoints]="waypoints" [optimizeWaypoints]="false">
+        </agm-direction>
       </agm-map>
     </div>
   </div>
   <div class="row buttons">
-      <div class="col-md-6">
-          <button class="btn btn-lg btn-block" (click)="setShowPins()" >Show Requested Accounts</button>
-      </div>
-      <div class="col-md-6">
-          <button class="btn btn-primary btn-lg btn-block" (click)="setShowRoute()"  [attr.disabled]="!calculatedResults?'':null">Find Optimal Route</button>
-      </div>
+    <div class="col-md-6">
+      <button class="btn btn-lg btn-block" (click)="setShowPins()">Show Requested Accounts</button>
+    </div>
+    <div class="col-md-6">
+      <button class="btn btn-primary btn-lg btn-block" (click)="setShowRoute()" [attr.disabled]="!calculatedResults?'':null">Find
+        Optimal Route</button>
+    </div>
   </div>
 </div>
-

@@ -27,12 +27,19 @@ export class SolutionEntry implements Serializable<SolutionEntry> {
     this.latitude = input.latitude;
     this.longitude = input.longitude;
     this.revenueOpportunity = input.revenueOpportunityStr;
-    this.date = new Date(input.availableDate);
+    if (input.availableDate !== null) {
+      this.date = new Date(input.availableDate);
+    } else {
+      this.date = null;
+    }
     return this;
   }
 
   getMonthDay(): String {
-    return this.date.getMonth() + '/' + this.date.getDate();
+    if (this.date === null) {
+      return '';
+    }
+    return (this.date.getMonth() + 1) + '/' + this.date.getDate();
   }
 
 }

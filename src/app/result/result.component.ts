@@ -39,6 +39,9 @@ export class ResultComponent implements OnInit {
   public allAccountsMarkers: SolutionEntry[];
   public markers: SolutionEntry[];
 
+  public solvedEntries: SolutionEntry[];
+  public unsolvedEntries: SolutionEntry[];
+
   public loading = true;
   public calculatedResults = false;
   public screen = Screen.ALL;
@@ -90,11 +93,10 @@ export class ResultComponent implements OnInit {
   setSolution(s: Solution) {
     this.solution = s;
     const temp = s.getWaypoints();
-    console.log('waypoints: ' + temp);
-    console.log(temp);
-    this.markers = s.getLatLongArray();
-    console.log('markers: ' + this.markers);
-    console.log(this.markers);
+    this.unsolvedEntries = s.getUnsolvedEntries();
+    console.log('unsolvedEntries: ' + this.unsolvedEntries);
+    this.solvedEntries = s.getSolvedEntries();
+    console.log('solvedEntries: ' + this.solvedEntries);
     const cut: {
       location: { lat: number; lng: number };
       stopover: boolean;

@@ -7,9 +7,17 @@ export class Solution implements Serializable<Solution> {
   public solutionEntries: SolutionEntry[];
 
   public getWaypoints(): {location: {lat: number, lng: number }, stopover: boolean}[] {
-    return this.solutionEntries.map(es => {
+    return this.solutionEntries.filter(es => es.date !== null).map(es => {
       return  {location: {lat: es.latitude, lng: es.longitude}, stopover: true };
     });
+  }
+
+  public getSolvedEntries(): SolutionEntry[] {
+    return this.solutionEntries.filter(es => es.date !== null);
+  }
+
+  public getUnsolvedEntries(): SolutionEntry[] {
+    return this.solutionEntries.filter(es => es.date === null);
   }
 
   public getLatLongArray(): SolutionEntry[] {
