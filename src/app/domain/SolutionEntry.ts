@@ -32,7 +32,7 @@ export class SolutionEntry implements Serializable<SolutionEntry> {
   }
 
   getMonthDay(): String {
-    return this.date.getMonth() + '/' + this.date.getDate();
+    return this.date.getMonth() + '/' + this.date.getUTCDate();
   }
 
 }
