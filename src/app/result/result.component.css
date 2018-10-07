@@ -1,10 +1,10 @@
 agm-map {
-  height: 90vh;
+  height: 87vh;
   width: 100%;
 }
 
 .loading {
-  height: 90vh;
+  height: 87vh;
 }
 .container {
   width: 90%;
@@ -12,7 +12,7 @@ agm-map {
 }
 
 .btn-block {
-  margin-top: 2vh;
+  margin-top: 1vh;
   /* padding: 10% 0; */
 }
 
