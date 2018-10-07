@@ -39,7 +39,7 @@ export class SolutionEntry implements Serializable<SolutionEntry> {
     if (this.date === null) {
       return '';
     }
-    return (this.date.getMonth() + 1) + '/' + this.date.getDate();
+    return (this.date.getMonth() + 1) + '/' + this.date.getUTCDate();
   }
 
 }

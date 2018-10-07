@@ -6,13 +6,14 @@
         <h2 class="panel-tittle">Welcome to MPC Truck Request Form</h2>
       </div>
 
-      <div clas="panel-body">
+      <p *ngIf="loading" class="loading">Loading...</p>
+      <div *ngIf="!loading" class="panel-body">
         <div class="form-group" *ngIf="!wasSubmitted">
           <label>Select an account</label>
           <div class="form-check" *ngFor="let e of elections">
               <label class="form-check-label text-center" [for]="e.accountId">
                   <input class="form-check-input radio-inline" [id]="e.accountId" type="radio" name="election" [value]="e.accountId" [(ngModel)]="election" title="Please select at least one account." required>
-                  {{e.venueName}} ({{e.cityName}}) - {{ e.date | date:'mediumDate' }}
+                  {{e.venueName}} ({{e.cityName}}) - {{ e.date | date:'mediumDate':'UTC' }}
               </label>
           </div>
           <input class="btn btn-primary" type="submit" value="Request Truck" [disabled]="!electionForm.valid">
