@@ -13,7 +13,7 @@
           <div class="form-check" *ngFor="let e of elections">
               <label class="form-check-label text-center" [for]="e.accountId">
                   <input class="form-check-input radio-inline" [id]="e.accountId" type="radio" name="election" [value]="e.accountId" [(ngModel)]="election" title="Please select at least one account." required>
-                  {{e.venueName}} ({{e.cityName}}) - {{ e.date | date:'mediumDate' }}
+                  {{e.venueName}} ({{e.cityName}}) - {{ e.date | date:'mediumDate':'UTC' }}
               </label>
           </div>
           <input class="btn btn-primary" type="submit" value="Request Truck" [disabled]="!electionForm.valid">
