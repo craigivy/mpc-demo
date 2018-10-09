@@ -7,6 +7,10 @@
   height: 100vh;
 }
 
+input[type="radio"] {
+  margin-right: 3px;
+}
+
 label {
   font-size: 14px;
 }
