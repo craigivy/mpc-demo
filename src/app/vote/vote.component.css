@@ -7,6 +7,11 @@
   height: 100vh;
 }
 
+label {
+  font-size: 15px;
+}
+
+
 .radio-inline {
   margin-top: 0px;
 }
