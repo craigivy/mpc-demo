@@ -1,6 +1,6 @@
 <div class="container">
   <div>
-    <h1><b>MPC Demo</b></h1>
+    <h1><b>MPC Tour of the Americas</b></h1>
   </div>
   <div class="row col-12">
     <p *ngIf="loading" class="loading">Loading</p>
@@ -29,7 +29,7 @@
             <agm-snazzy-info-window [isOpen]="true" [pointer]="false" [maxWidth]="200" [padding]="'2px'" [fontSize]="'8px'"
               [closeWhenOthersOpen]="false" [showCloseButton]="false">
               <ng-template>
-                <div class="loc-text">{{m.venueName}}: {{m.revenueOpportunity}}</div>
+                <div class="loc-text">{{m.venueName}} {{m.getMonthDay()}}: {{m.revenueOpportunity}}</div>
               </ng-template>
             </agm-snazzy-info-window>
           </agm-marker>
