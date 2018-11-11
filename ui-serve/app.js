@@ -58,6 +58,28 @@ app.use('/api/config', (request, response) => {
   return response.send(JSON.stringify({apiBase: apiBase, mapKey: mapKey}));
 });
 
+// Allowed extensions list can be extended depending on your own needs
+const allowedExt = [
+  '.js',
+  '.ico',
+  '.css',
+  '.png',
+  '.jpg',
+  '.woff2',
+  '.woff',
+  '.ttf',
+  '.svg',
+];
+
+app.get('*', (request, response) => {
+  if (allowedExt.filter(ext => request.url.indexOf(ext) > 0).length > 0) {
+    response.sendFile(path.resolve(`public/${request.url}`));
+  } else {
+    response.sendFile(path.resolve('public/index.html'));
+  }
+});
+
+
 // Set health check
 probe(app);
 
