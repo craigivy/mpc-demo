@@ -77,11 +77,11 @@ setInterval(() => {
       mapKey = config.mapKey
 
       // Set New log level
-      if (logger.level !== config.level.toLowerCase()) {
-        logger.info('New configuration retrieved: {}', config);
-        logger.info('New log level: {}', config.level.toLowerCase());
-        logger.level = config.level.toLowerCase();
-      }
+      // if (logger.level !== config.level.toLowerCase()) {
+      //   logger.info('New configuration retrieved: {}', config);
+      //   logger.info('New log level: {}', config.level.toLowerCase());
+      //   logger.level = config.level.toLowerCase();
+      // }
     }
   }).catch(err => {
     logger.error('Error getting config', err);
