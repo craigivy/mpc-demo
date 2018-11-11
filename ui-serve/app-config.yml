@@ -1,0 +1,4 @@
+message : "Hello %s from a ConfigMap!"
+level : INFO
+apiBase : http://localhost:8080
+mapKey : changeMe
