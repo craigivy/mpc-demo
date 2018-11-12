@@ -18,16 +18,11 @@ export class ApiService {
   private requestedUrl = this.base + 'selectedaccounts';
   private solutionUrl = this.base + 'solution';
   private logCacheUrl = this.base + 'printcache';
-  private baseUrl;
-  private apiBase;
-  private mapKey;
-  private config;
   private settings: Settings;
 
   private configUrl = 'api/config';
 
-  constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    this.baseUrl = baseUrl;
+  constructor(private http: HttpClient) {
   }
 
     public initializeApp() {
