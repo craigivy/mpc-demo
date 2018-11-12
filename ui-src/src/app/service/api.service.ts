@@ -1,8 +1,11 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Injectable, Inject } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpParams, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of, merge } from 'rxjs';
-import { mapTo, delay, map } from 'rxjs/operators';
-import { Solution } from '../domain';
+import { mapTo, delay, map, tap } from 'rxjs/operators';
+import { Solution, Settings } from '../domain';
+
+// import 'rxjs/add/operator/map';
+// import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class ApiService {
@@ -15,8 +18,100 @@ export class ApiService {
   private requestedUrl = this.base + 'selectedaccounts';
   private solutionUrl = this.base + 'solution';
   private logCacheUrl = this.base + 'printcache';
+  private baseUrl;
+  private apiBase;
+  private mapKey;
+  private config;
+  private settings: Settings;
 
-  constructor(private http: HttpClient) {
+  private configUrl = 'api/config';
+
+  constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
+    this.baseUrl = baseUrl;
+//    this.initializeApp();
+    // console.log(this.baseUrl + this.configUrl);
+    //  this.getConf()
+    // .subscribe(
+    //   (data: Config) => this.config = { ...data }, // success path
+//      error => this.error = error // error path
+    //   error => console.log("error? " + error) // error path
+    // );
+//    console.log(this.http.get(baseUrl + this.configUrl));
+    // this.getConfig();
+
+//     this.http.get(baseUrl + this.configUrl).pipe(map(o => {
+//       console.log(`ApiService:: constructor`);
+//       console.log(o);
+// //      return o;
+// //      return new Solution().deserializeAccounts(o);
+//     }));
+//    console.log(this.config);
+    console.log(`ApiService:: done`);
+//    console.log(this.config);
+
+
+//     http.get(baseUrl + 'api/config').subscribe(result => {
+//       console.log(result);
+// //      this.products = result.json() as IProduct[];
+//   }, error => console.error(error));
+  }
+
+//   public initializeApp(): Observable<any> {
+//     console.log(`initializeApp:: inside`);
+//     return this.http.get(this.configUrl).pipe(map(o => {
+//       console.log(`initializeApp:: config called`);
+//       console.log(o);
+//       return o;
+// //      return new Solution().deserializeAccounts(o);
+//     })
+//     );
+
+//   }
+
+//   private getConf(): Observable<any> {
+// //    const fullUrl = this.baseUrl + this.configUrl;
+//     const fullUrl = this.configUrl;
+//     console.log(`hi ApiService:: getConfig configURL=` + fullUrl);
+//     return this.http.get(fullUrl);
+//   }
+
+//   private getConfig() {
+// //  getConfig(): Observable<any> {
+// //        return this.http.get(this.apiBase + this.configUrl).pipe(map(o => this.deserializeConfig(o)));
+//     const fullUrl = this.baseUrl + this.configUrl;
+//     console.log(`ApiService:: getConfig con figURL=` + fullUrl);
+
+//     return this.http.get(fullUrl)
+//                 .pipe(
+//                   tap(
+//                   data => this.deserializeConfig(data),
+//                   error => this.handleError(error)
+//                 )
+//                 );
+//   }
+
+//   deserializeConfig(input) {
+//     console.log(`ApiServer:: deserializeConfig`);
+//     this.apiBase = input.apiBase;
+//     this.mapKey = input.mapKey;
+//     console.log(this.apiBase);
+//   }
+
+//   public initializeApp(): Observable<any> {
+
+    public initializeApp() {
+    console.log(`ApiService:: initializeApp configURL=` + this.configUrl);
+    const obs = this.http.get(this.configUrl);
+//    const obs = this.http.get('https://api.github.com/users/craigivy');
+    obs.subscribe(
+      (response) => {
+        this.settings = new Settings().deserialize(response);
+        console.log('settings ' + JSON.stringify(this.settings));
+      },
+      (error) => console.log('`ApiService:: initializeApp error ' + error)
+      );
+
+//    return this.http.get<Settings>(this.configUrl).pipe(data => new Settings().deserialize(data));
   }
 
   public getAllAccounts(): Observable<Solution> {
@@ -56,6 +151,22 @@ export class ApiService {
     console.log(this.logCacheUrl, 'will log the cache');
   }
 
+  private handleError(error: HttpErrorResponse) {
+    console.log('ApiServer:: handleError');
+    if (error.error instanceof ErrorEvent) {
+      // A client-side or network error occurred. Handle it accordingly.
+      console.error('An error occurred:', error.error.message);
+    } else {
+      // The backend returned an unsuccessful response code.
+      // The response body may contain clues as to what went wrong,
+      console.error(
+        `Backend returned code ${error.status}, ` +
+        `body was: ${error.error}`);
+    }
+    // // return an observable with a user-facing error message
+    // return throwError(
+    //   'Something bad happened; please try again later.');
+  }
 
   private hardCoded(): Solution {
     return new Solution().deserialize({
