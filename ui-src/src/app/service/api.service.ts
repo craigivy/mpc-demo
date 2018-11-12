@@ -35,8 +35,6 @@ export class ApiService {
       },
       (error) => console.log('`ApiService:: initializeApp error ' + error)
       );
-
-//    return this.http.get<Settings>(this.configUrl).pipe(data => new Settings().deserialize(data));
   }
 
   public getAllAccounts(): Observable<Solution> {
