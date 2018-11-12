@@ -28,85 +28,15 @@ export class ApiService {
 
   constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
     this.baseUrl = baseUrl;
-//    this.initializeApp();
-    // console.log(this.baseUrl + this.configUrl);
-    //  this.getConf()
-    // .subscribe(
-    //   (data: Config) => this.config = { ...data }, // success path
-//      error => this.error = error // error path
-    //   error => console.log("error? " + error) // error path
-    // );
-//    console.log(this.http.get(baseUrl + this.configUrl));
-    // this.getConfig();
-
-//     this.http.get(baseUrl + this.configUrl).pipe(map(o => {
-//       console.log(`ApiService:: constructor`);
-//       console.log(o);
-// //      return o;
-// //      return new Solution().deserializeAccounts(o);
-//     }));
-//    console.log(this.config);
-    console.log(`ApiService:: done`);
-//    console.log(this.config);
-
-
-//     http.get(baseUrl + 'api/config').subscribe(result => {
-//       console.log(result);
-// //      this.products = result.json() as IProduct[];
-//   }, error => console.error(error));
   }
-
-//   public initializeApp(): Observable<any> {
-//     console.log(`initializeApp:: inside`);
-//     return this.http.get(this.configUrl).pipe(map(o => {
-//       console.log(`initializeApp:: config called`);
-//       console.log(o);
-//       return o;
-// //      return new Solution().deserializeAccounts(o);
-//     })
-//     );
-
-//   }
-
-//   private getConf(): Observable<any> {
-// //    const fullUrl = this.baseUrl + this.configUrl;
-//     const fullUrl = this.configUrl;
-//     console.log(`hi ApiService:: getConfig configURL=` + fullUrl);
-//     return this.http.get(fullUrl);
-//   }
-
-//   private getConfig() {
-// //  getConfig(): Observable<any> {
-// //        return this.http.get(this.apiBase + this.configUrl).pipe(map(o => this.deserializeConfig(o)));
-//     const fullUrl = this.baseUrl + this.configUrl;
-//     console.log(`ApiService:: getConfig con figURL=` + fullUrl);
-
-//     return this.http.get(fullUrl)
-//                 .pipe(
-//                   tap(
-//                   data => this.deserializeConfig(data),
-//                   error => this.handleError(error)
-//                 )
-//                 );
-//   }
-
-//   deserializeConfig(input) {
-//     console.log(`ApiServer:: deserializeConfig`);
-//     this.apiBase = input.apiBase;
-//     this.mapKey = input.mapKey;
-//     console.log(this.apiBase);
-//   }
-
-//   public initializeApp(): Observable<any> {
 
     public initializeApp() {
     console.log(`ApiService:: initializeApp configURL=` + this.configUrl);
     const obs = this.http.get(this.configUrl);
-//    const obs = this.http.get('https://api.github.com/users/craigivy');
     obs.subscribe(
       (response) => {
         this.settings = new Settings().deserialize(response);
-        console.log('settings ' + JSON.stringify(this.settings));
+        console.log('settings: ' + JSON.stringify(this.settings));
       },
       (error) => console.log('`ApiService:: initializeApp error ' + error)
       );
