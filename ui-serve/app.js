@@ -45,12 +45,13 @@ let mapKey;
 app.use('/api/config', (request, response) => {
   const name = (request.query && request.query.name) ? request.query.name : 'World';
 
-  logger.debug('apiBase, parameter={}', apiBase);
-  logger.debug('mapKey, parameter={}', mapKey);
+  logger.info('apiBase, parameter={}', apiBase);
+  logger.info('mapKey, parameter={}', mapKey);
 
   if (!apiBase || !mapKey) {
-    response.status(500);
-    return response.send({content: 'no config map containing apiBase or mapKey'});
+    // response.status(500);
+    return response.send(JSON.stringify({apiBase: "http://localhost:1111", mapKey: "change me"}));
+//    return response.send({content: 'no config map containing apiBase or mapKey'});
   }
 
   logger.debug('Replying to request, parameter={}', name);
