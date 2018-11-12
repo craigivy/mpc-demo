@@ -49,9 +49,7 @@ app.use('/api/config', (request, response) => {
   logger.info('mapKey, parameter={}', mapKey);
 
   if (!apiBase || !mapKey) {
-    // response.status(500);
-    return response.send(JSON.stringify({apiBase: "http://localhost:1111", mapKey: "change me"}));
-//    return response.send({content: 'no config map containing apiBase or mapKey'});
+    return response.send(JSON.stringify({apiBase: "http://localhost:8080", mapKey: "change me"}));
   }
 
   logger.debug('Replying to request, parameter={}', name);
